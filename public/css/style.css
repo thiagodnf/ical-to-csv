@@ -1,0 +1,26 @@
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at left top, rgba(13, 110, 253, 0.5), transparent 50%), radial-gradient(at right top, rgba(255, 228, 132, 0.5), transparent 50%), radial-gradient(at right center, rgba(113, 44, 249, 0.5), transparent 50%), radial-gradient(at left center, rgba(214, 51, 132, 0.5), transparent 50%);
+}
+
+a{
+    text-decoration: none;
+}
+
+.logo {
+    margin-top: 150px;
+    font-size: calc(100% + 6vw + 1vh) !important;
+    font-weight: bold;
+}
+
+.btn-primary {
+
+    background-color: #5a23c8;
+    border-color: #5a23c8;
+}
+
+.btn-primary:hover {
+    background-color: #6528e0 !important;
+    border-color: #6528e0;
+}
