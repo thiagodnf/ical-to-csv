@@ -1,5 +1,6 @@
-# ical-to-csv
- Convert from .ical to .csv files on your browser. No data sent out to external servers
+<img src-"https://user-images.githubusercontent.com/98138701/170802818-666da66d-5003-40b4-9f5c-a965bc2e8752.png" >
+
+Convert from .ical to .csv files on your browser. No data sent out to external servers
 
 
 [![GitHub Release](https://img.shields.io/github/release/thiagodonferreira/ical-to-csv.svg)](https://github.com/thiagodonferreira/ical-to-csv/releases/latest)
