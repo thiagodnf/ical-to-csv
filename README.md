@@ -45,6 +45,10 @@ Contributions to the this project are very welcome! We can't do this alone! Feel
 
 Licensed under the [MIT license](LICENSE).
 
+## Acknowledgement
+
+Thanks [Peter Braden](https://github.com/peterbraden) for providing your amazing [library](https://github.com/peterbraden/ical.js/).
+
 ## Donate
 
 I open-source almost everything I can, and I try to reply to everyone needing help using these projects. Obviously, this takes time. You can integrate and use these projects in your applications for free! You can even change the source code and redistribute (even resell it).
