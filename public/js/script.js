@@ -34,12 +34,20 @@ function generateCSV(file, content, separator = ",") {
 
         const event = parsed[k];
 
+        event.type = event.type.replaceAll("\r", "");
+        event.uid = event.uid.replaceAll("\r", "");
+        event.start = event.start.replaceAll("\r", "");
+        event.end = event.end.replaceAll("\r", "");
+        event.summary = event.summary? event.summary.replaceAll("\r", ""): "";
+        event.description = event.description? event.description.replaceAll("\r", ""): "";
+        event.location = event.location? event.location.replaceAll("\r", ""): "";
+
         if (event.type == 'VEVENT') {
 
             const row = [
                 event.uid,
-                dayjs(event.start).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
-                dayjs(event.end).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                dayjs(iCalDateParser(event.start)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                dayjs(iCalDateParser(event.end)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
                 event.summary ? `"${event.summary}"` : "",
                 event.description ? `"${event.description}"` : "",
                 event.location ? `"${event.location}"` : "",
