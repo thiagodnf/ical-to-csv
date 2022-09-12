@@ -14,13 +14,15 @@ a{
     font-weight: bold;
 }
 
-.btn-primary {
+.btn-purple {
 
     background-color: #5a23c8;
     border-color: #5a23c8;
+    color: white;
 }
 
-.btn-primary:hover {
+.btn-purple:hover {
     background-color: #6528e0 !important;
     border-color: #6528e0;
+    color: white !important;
 }

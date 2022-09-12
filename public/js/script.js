@@ -42,9 +42,9 @@ function generateCSV(file, content, separator = ",") {
         event.uid = event.uid.replaceAll("\r", "");
         event.start = event.start.replaceAll("\r", "");
         event.end = event.end.replaceAll("\r", "");
-        event.summary = event.summary? event.summary.replaceAll("\r", ""): "";
-        event.description = event.description? event.description.replaceAll("\r", ""): "";
-        event.location = event.location? event.location.replaceAll("\r", ""): "";
+        event.summary = event.summary ? event.summary.replaceAll("\r", "") : "";
+        event.description = event.description ? event.description.replaceAll("\r", "") : "";
+        event.location = event.location ? event.location.replaceAll("\r", "") : "";
 
         if (event.type == 'VEVENT') {
 
@@ -90,11 +90,20 @@ $(function () {
     }
 
     window.onerror = function (message, url, lineNumber) {
-        alert(message);
+
+        bootbox.alert({
+            title: "Ooops...",
+            animate: false,
+            centerVertical: true,
+            message: message.trim().replaceAll("Error: ", ""),
+            closeButton: false
+        });
+
         return true;
     };
 
     $("#form-input").submit((event) => {
+
         event.preventDefault();
 
         let $file = $('#file')[0];
@@ -119,12 +128,12 @@ $(function () {
 
         var reader = new FileReader();
 
-        reader.onload = function (evt) {
-            generateCSV(file, evt.target.result);
+        reader.onerror = function () {
+            throw new Error(`Error occurred reading file: ${file.name}`);
         };
 
-        reader.onerror = function (event) {
-            throw new Error(`Error occurred reading file: ${file.name}`);
+        reader.onload = function (evt) {
+            generateCSV(file, evt.target.result);
         };
 
         reader.readAsText(file, "utf-8");
