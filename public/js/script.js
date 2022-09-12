@@ -1,3 +1,6 @@
+let settings = {
+    separator: ","
+};
 
 function download(filename, text) {
     var element = document.createElement('a');
@@ -13,7 +16,7 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-function generateCSV(file, content, separator = ",") {
+function generateCSV(file, content) {
 
     const parsed = ical.parseICS(content);
 
@@ -32,7 +35,7 @@ function generateCSV(file, content, separator = ",") {
 
     const lines = [];
 
-    lines.push(columns.join(separator));
+    lines.push(columns.join(settings.separator));
 
     for (let k in parsed) {
 
@@ -64,7 +67,7 @@ function generateCSV(file, content, separator = ",") {
                 event.location ? `"${event.location}"` : "",
             ];
 
-            lines.push(row.join(separator));
+            lines.push(row.join(settings.separator));
         }
     }
 
@@ -101,6 +104,13 @@ $(function () {
 
         return true;
     };
+
+    $("#csv-separator").on('change', function() {
+
+        settings.separator = this.value;
+
+        return false;
+    });
 
     $("#form-input").submit((event) => {
 
