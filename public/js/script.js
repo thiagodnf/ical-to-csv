@@ -20,7 +20,11 @@ function generateCSV(file, content, separator = ",") {
     const columns = [
         "uid",
         "start",
+        "start_as_date",
+        "start_as_time",
         "end",
+        "end_as_date",
+        "end_as_time",
         "summary",
         "description",
         "location"
@@ -46,8 +50,15 @@ function generateCSV(file, content, separator = ",") {
 
             const row = [
                 event.uid,
+
                 dayjs(iCalDateParser(event.start)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                dayjs(iCalDateParser(event.start)).format("M/D/YYYY"),
+                dayjs(iCalDateParser(event.start)).format("h:mm A"),
+
                 dayjs(iCalDateParser(event.end)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                dayjs(iCalDateParser(event.end)).format("M/D/YYYY"),
+                dayjs(iCalDateParser(event.end)).format("h:mm A"),
+
                 event.summary ? `"${event.summary}"` : "",
                 event.description ? `"${event.description}"` : "",
                 event.location ? `"${event.location}"` : "",
