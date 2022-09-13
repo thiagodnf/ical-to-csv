@@ -1,14 +1,14 @@
 {
     "name": "ical-to-csv",
-    "version": "0.0.1",
-    "author": "Thiago do N. Ferreira",
+    "version": "0.0.2",
+    "author": "Thiago Ferreira",
     "license": "MIT",
     "description": "Convert from .ical to .csv files on your browser. No data sent out to external servers",
-    "homepage": "https://thiagodonferreira.github.io/ical-to-csv",
+    "homepage": "https://thiagodnf.github.io/ical-to-csv",
     "private": true,
     "repository": {
         "type": "git",
-        "url": "https://github.com/thiagodonferreira/ical-to-csv"
+        "url": "https://github.com/thiagodnf/ical-to-csv"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
