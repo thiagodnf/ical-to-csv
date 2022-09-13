@@ -48,7 +48,7 @@
     </main>
 
 
-    <div class="modal fade" id="settings" tabindex="-1">
+    <div class="modal" id="settings" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -56,8 +56,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="csv-separator" class="form-label fw-bold">CSV Separator</label>
-                        <select class="form-select form-select-sm" id="csv-separator">
+                        <label for="csvSeparator" class="form-label fw-bold">CSV Separator</label>
+                        <select class="form-select form-select-sm" id="csvSeparator" data-settings-type="string">
                             <option value="," checked>, (Comma)</option>
                             <option value=";">; (Semi-colon)</option>
                             <option value=":">: (colon)</option>
@@ -68,34 +68,28 @@
                     <div class="mb-3">
                         <p class="fw-bold">Remove all:</p>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" checked id="remove-all-new-line-characters">
-                            <label class="form-check-label" for="remove-all-new-line-characters">New line characters (<code>\n</code>)</label>
+                            <input class="form-check-input" type="checkbox" checked id="removeAllNewLineCharacters" data-settings-type="bool">
+                            <label class="form-check-label" for="removeAllNewLineCharacters">New line characters (<code>\n</code>)</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" checked  id="remove-all-carriage-return-characters">
-                            <label class="form-check-label" for="remove-all-carriage-return-characters">Carriage return characters (<code>\r</code>)</label>
+                            <input class="form-check-input" type="checkbox" checked  id="removeAllCarriageReturnCharacters" data-settings-type="bool">
+                            <label class="form-check-label" for="removeAllCarriageReturnCharacters">Carriage return characters (<code>\r</code>)</label>
                         </div>
                     </div>
                     <div class="mb-1">
                         <p class="fw-bold">Escape string (add quotation marks) in:</p>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" checked   id="escape-strings-in-summary">
-                            <label class="form-check-label" for="escape-strings-in-summary">Summary</label>
+                            <input class="form-check-input" type="checkbox" checked id="escapeStringsInSummary" data-settings-type="bool">
+                            <label class="form-check-label" for="escapeStringsInSummary">Summary</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" checked id="escape-strings-in-description">
-                            <label class="form-check-label" for="escape-strings-in-description">Description</label>
+                            <input class="form-check-input" type="checkbox" checked id="escapeStringsInDescription" data-settings-type="bool">
+                            <label class="form-check-label" for="escapeStringsInDescription">Description</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" checked  id="escape-strings-in-location">
-                            <label class="form-check-label" for="escape-strings-in-location">Location</label>
+                            <input class="form-check-input" type="checkbox" checked  id="escapeStringsInLocation" data-settings-type="bool">
+                            <label class="form-check-label" for="escapeStringsInLocation">Location</label>
                         </div>
-                    </div>
-                    <div class="mb-1">
-
-                    </div>
-                    <div class="mb-1">
-
                     </div>
                 </div>
                 <div class="modal-footer">

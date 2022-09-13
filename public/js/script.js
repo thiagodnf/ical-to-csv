@@ -1,14 +1,10 @@
 let settings = {
-    separator: ",",
-    removeAll: {
-        newLineCharacters: true,
-        carriageReturnCharacters: true
-    },
-    escapeStringsIn: {
-        summary: true,
-        description: true,
-        location: true
-    }
+    csvSeparator: ",",
+    removeAllNewLineCharacters: true,
+    removeAllCarriageReturnCharacters: true,
+    escapeStringsInSummary: true,
+    escapeStringsInDescription: true,
+    escapeStringsInLocation: true,
 };
 
 function download(filename, text) {
@@ -45,7 +41,7 @@ function generateCSV(file, content) {
 
     const lines = [];
 
-    lines.push(columns.join(settings.separator));
+    lines.push(columns.join(settings.csvSeparator));
 
     for (let k in parsed) {
 
@@ -59,23 +55,23 @@ function generateCSV(file, content) {
                 continue;
             }
 
-            if (settings.removeAll.carriageReturnCharacters) {
+            if (settings.removeAllCarriageReturnCharacters) {
                 event[prop] = event[prop].replaceAll("\r", "");
             }
 
-            if (settings.removeAll.newLineCharacters) {
+            if (settings.removeAllNewLineCharacters) {
                 event[prop] = event[prop].replaceAll("\n", "");
             }
 
-            if (prop == "summary" && settings.escapeStringsIn.summary) {
+            if (prop == "summary" && settings.escapeStringsInSummary) {
                 event[prop] = "\"" + event[prop] + "\"";
             }
 
-            if (prop == "location" && settings.escapeStringsIn.location) {
+            if (prop == "location" && settings.escapeStringsInLocation) {
                 event[prop] = "\"" + event[prop] + "\"";
             }
 
-            if (prop == "description" && settings.escapeStringsIn.description) {
+            if (prop == "description" && settings.escapeStringsInDescription) {
                 event[prop] = "\"" + event[prop] + "\"";
             }
         }
@@ -101,7 +97,7 @@ function generateCSV(file, content) {
                 event.location ? event.location : "",
             ];
 
-            lines.push(row.join(settings.separator));
+            lines.push(row.join(settings.csvSeparator));
         }
     }
 
@@ -139,44 +135,16 @@ $(function () {
         return true;
     };
 
-    $("#csv-separator").on('change', function () {
+    $("select[data-settings-type='string'").on('change', function () {
 
-        settings.separator = this.value;
-
-        return false;
-    });
-
-    $("#escape-strings-in-summary").on('change', function () {
-
-        settings.escapeStringsIn.summary = $(this).is(':checked');
+        settings[$(this).prop("id")] = this.value;
 
         return false;
     });
 
-    $("#escape-strings-in-description").on('change', function () {
+    $("input[data-settings-type='bool'").on('change', function () {
 
-        settings.escapeStringsIn.description = $(this).is(':checked');
-
-        return false;
-    });
-
-    $("#escape-strings-in-location").on('change', function () {
-
-        settings.escapeStringsIn.location = $(this).is(':checked');
-
-        return false;
-    });
-
-    $("#remove-all-new-line-characters").on('change', function () {
-
-        settings.removeAll.newLineCharacters = $(this).is(':checked');
-
-        return false;
-    });
-
-    $("#remove-all-carriage-return-characters").on('change', function () {
-
-        settings.removeAll.carriageReturnCharacters = $(this).is(':checked');
+        settings[$(this).prop("id")] = $(this).is(':checked');
 
         return false;
     });
