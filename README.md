@@ -11,7 +11,7 @@ Convert from .ical to .csv files on your browser. No data sent out to external s
 
 ## How To Use
 
-Access the app [here](thiagodnf.github.io/ical-to-csv).
+Access the app [here](https://thiagodnf.github.io/ical-to-csv).
 
 ## Screenshots
 
