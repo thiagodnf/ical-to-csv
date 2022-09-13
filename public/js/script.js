@@ -1,8 +1,18 @@
 let settings = {
-    separator: ","
+    separator: ",",
+    removeAll: {
+        newLineCharacters: true,
+        carriageReturnCharacters: true
+    },
+    escapeStringsIn: {
+        summary: true,
+        description: true,
+        location: true
+    }
 };
 
 function download(filename, text) {
+
     var element = document.createElement('a');
 
     element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
@@ -41,30 +51,54 @@ function generateCSV(file, content) {
 
         const event = parsed[k];
 
-        event.type = event.type.replaceAll("\r", "");
-        event.uid = event.uid.replaceAll("\r", "");
-        event.start = event.start.replaceAll("\r", "");
-        event.end = event.end.replaceAll("\r", "");
-        event.summary = event.summary ? event.summary.replaceAll("\r", "") : "";
-        event.description = event.description ? event.description.replaceAll("\r", "") : "";
-        event.location = event.location ? event.location.replaceAll("\r", "") : "";
+        // Let's sanitize the data
+
+        for (const prop in event) {
+
+            if ((typeof event[prop]) !== "string") {
+                continue;
+            }
+
+            if (settings.removeAll.carriageReturnCharacters) {
+                event[prop] = event[prop].replaceAll("\r", "");
+            }
+
+            if (settings.removeAll.newLineCharacters) {
+                event[prop] = event[prop].replaceAll("\n", "");
+            }
+
+            if (prop == "summary" && settings.escapeStringsIn.summary) {
+                event[prop] = "\"" + event[prop] + "\"";
+            }
+
+            if (prop == "location" && settings.escapeStringsIn.location) {
+                event[prop] = "\"" + event[prop] + "\"";
+            }
+
+            if (prop == "description" && settings.escapeStringsIn.description) {
+                event[prop] = "\"" + event[prop] + "\"";
+            }
+        }
 
         if (event.type == 'VEVENT') {
+
+            const startDate = dayjs(iCalDateParser(event.start));
+            const endDate = dayjs(iCalDateParser(event.end));
 
             const row = [
                 event.uid,
 
-                dayjs(iCalDateParser(event.start)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
-                dayjs(iCalDateParser(event.start)).format("M/D/YYYY"),
-                dayjs(iCalDateParser(event.start)).format("h:mm A"),
+                startDate.format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                startDate.format("M/D/YYYY"),
+                startDate.format("h:mm A"),
 
-                dayjs(iCalDateParser(event.end)).format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
-                dayjs(iCalDateParser(event.end)).format("M/D/YYYY"),
-                dayjs(iCalDateParser(event.end)).format("h:mm A"),
+                endDate.format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
+                endDate.format("M/D/YYYY"),
+                endDate.format("h:mm A"),
 
-                event.summary ? `"${event.summary}"` : "",
-                event.description ? `"${event.description}"` : "",
-                event.location ? `"${event.location}"` : "",
+                event.summary ? event.summary : "",
+                event.description ? event.description : "",
+                event.location ? event.location : "",
             ];
 
             lines.push(row.join(settings.separator));
@@ -105,9 +139,44 @@ $(function () {
         return true;
     };
 
-    $("#csv-separator").on('change', function() {
+    $("#csv-separator").on('change', function () {
 
         settings.separator = this.value;
+
+        return false;
+    });
+
+    $("#escape-strings-in-summary").on('change', function () {
+
+        settings.escapeStringsIn.summary = $(this).is(':checked');
+
+        return false;
+    });
+
+    $("#escape-strings-in-description").on('change', function () {
+
+        settings.escapeStringsIn.description = $(this).is(':checked');
+
+        return false;
+    });
+
+    $("#escape-strings-in-location").on('change', function () {
+
+        settings.escapeStringsIn.location = $(this).is(':checked');
+
+        return false;
+    });
+
+    $("#remove-all-new-line-characters").on('change', function () {
+
+        settings.removeAll.newLineCharacters = $(this).is(':checked');
+
+        return false;
+    });
+
+    $("#remove-all-carriage-return-characters").on('change', function () {
+
+        settings.removeAll.carriageReturnCharacters = $(this).is(':checked');
 
         return false;
     });

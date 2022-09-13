@@ -32,22 +32,7 @@
                     <input class="form-control" id="file" type="file">
                     <div class="form-text small d-flex justify-content-between">
                         <span>Only .ical files are accepted</span>
-                        <a class="" data-bs-toggle="collapse" href="#settings"><i class="bi bi-gear"></i> Settings </a>
-                    </div>
-                     <div class="collapse mt-2" id="settings">
-                        <div class="card card-body text-start">
-                            <p class="fw-bold">Settings</p>
-                            <div class="mb-3">
-                                <label for="csv-separator" class="form-label">CSV Separator</label>
-                                <select class="form-select form-select-sm" id="csv-separator">
-                                    <option value="," checked>, (Comma)</option>
-                                    <option value=";">; (Semi-colon)</option>
-                                    <option value=":">: (colon)</option>
-                                    <option value=" ">(Space)</option>
-                                    <option value="\t">(Tab)</option>
-                                </select>
-                            </div>
-                        </div>
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#settings"><i class="bi bi-gear"></i> Settings </a>
                     </div>
                 </div>
                 <div class="text-center mb-5">
@@ -61,6 +46,64 @@
             </div>
         </div>
     </main>
+
+
+    <div class="modal fade" id="settings" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="csv-separator" class="form-label fw-bold">CSV Separator</label>
+                        <select class="form-select form-select-sm" id="csv-separator">
+                            <option value="," checked>, (Comma)</option>
+                            <option value=";">; (Semi-colon)</option>
+                            <option value=":">: (colon)</option>
+                            <option value=" ">(Space)</option>
+                            <option value="\t">(Tab)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <p class="fw-bold">Remove all:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked id="remove-all-new-line-characters">
+                            <label class="form-check-label" for="remove-all-new-line-characters">New line characters (<code>\n</code>)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked  id="remove-all-carriage-return-characters">
+                            <label class="form-check-label" for="remove-all-carriage-return-characters">Carriage return characters (<code>\r</code>)</label>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <p class="fw-bold">Escape string (add quotation marks) in:</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" checked   id="escape-strings-in-summary">
+                            <label class="form-check-label" for="escape-strings-in-summary">Summary</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" checked id="escape-strings-in-description">
+                            <label class="form-check-label" for="escape-strings-in-description">Description</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" checked  id="escape-strings-in-location">
+                            <label class="form-check-label" for="escape-strings-in-location">Location</label>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+
+                    </div>
+                    <div class="mb-1">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JS, Popper.js, and jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
